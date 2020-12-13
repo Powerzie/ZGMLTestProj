@@ -28,9 +28,9 @@ private:
 			tagName += fileTags[a];
 		}
 	}
-	vector<shared_ptr<TagAttribute>> getTagAttributes(int tagStart)
+	vector<TagAttribute> getTagAttributes(int tagStart)
 	{
-		vector<shared_ptr<TagAttribute>> attributes;
+		vector<TagAttribute> attributes;
 		string attributeName = "";
 		string attributeValue = "";
 		for (int a = tagStart+1;fileTags[a]!='>';a++)
@@ -45,7 +45,7 @@ private:
 						attributeValue += fileTags[a];
 						a++;
 					}
-						attributes.push_back(make_shared<TagAttribute>(attributeName, attributeValue));
+						attributes.push_back(TagAttribute(attributeName, attributeValue));
 					attributeName = "";
 				}
 				else
@@ -67,29 +67,33 @@ private:
 	}
 
 public:
-	vector<shared_ptr<Tag>> GetTags()
+	vector<Tag> GetTags()
 	{
 		int  tagStart = 0;
 		int  tagEnd = 0;
 		int lastTagEnd = 0;
 		int tagDescriptionEnd = 0;
+		int lastTagescriptionEnd = 0;
 		string currentTagName = "";
-		vector<shared_ptr<Tag>> tags;
+		vector<Tag> tags;
 		string str = fileTags;
+
 		while (tagStart != -1)
 		{
 			if (tagStart > str.length())
 				return tags;
 
 			str = str.substr(tagStart);
+
 			if (str[1] == '/')
 			{
 				tagStart = 0;
-				while (str[tagStart] != '>')
+				do
 				{
 					tagStart++;
-				}
+				} while (str[tagStart] != '>');
 				str = str.substr(++tagStart);
+				tagStart = str.find_first_of('<');
 				continue;
 			}
 			//query = fileRequests.substr(from, fileRequests.length());
@@ -101,14 +105,17 @@ public:
 
 
 			tagDescriptionEnd = (str.find_first_of('>')) + 2;
+			
 			if (tagEnd > lastTagEnd)
 			{
-				tags.push_back(make_shared<Tag>(currentTagName, getTagAttributes(tagStart)));
+				tags.push_back(Tag(currentTagName, getTagAttributes(tagStart)));
 			}
 			else
 			{
-				tags.back()->SetNestedTag(Tag(currentTagName, getTagAttributes(tagStart)));
+				auto attr = getTagAttributes(lastTagescriptionEnd);
+				tags.back().AddNestedTag(Tag(currentTagName, attr));
 			}
+			lastTagescriptionEnd = tagDescriptionEnd;
 			lastTagEnd = tagEnd;
 			tagStart = tagDescriptionEnd;
 
@@ -203,6 +210,10 @@ public:
 	/*	for (int a = 0;a < requestsQuantity;a++)
 		{
 		}*/
+	}
+	string GetFileRequests()
+	{
+		return fileRequests;
 	}
 	
 

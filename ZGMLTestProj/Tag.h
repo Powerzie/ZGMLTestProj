@@ -11,28 +11,32 @@ using std::vector;
 class Tag
 {
 private:
-	vector<shared_ptr<TagAttribute>> attributes;
-	shared_ptr<Tag> nestedTag = nullptr;
+	vector<TagAttribute> attributes;
+	vector<Tag> nestedTags ;
 	string tagName;
 public:
-	Tag(string tagName, vector<shared_ptr<TagAttribute>> attributes):attributes(attributes), tagName(tagName) {};
+	Tag(string tagName, vector<TagAttribute> attributes):attributes(attributes), tagName(tagName) {};
 	Tag(string tagName) :tagName(tagName) {};
-	void SetNestedTag(Tag tag)
+	void AddNestedTag(Tag tag)
 	{
-		nestedTag = make_shared<Tag>(tag);
+		nestedTags.push_back(tag);
 	}
-	bool isHaveNestedEmpty()
+	bool IsNestedTagsEmpty()
 	{
-		return this->nestedTag == nullptr;
+		return nestedTags.size() < 1;
 	}
 	
-	Tag& GetNestedTag()
+	vector<Tag> GetNestedTags()
 	{
-		return *nestedTag;
+		return nestedTags;
 	}
 	string GetTagName()const
 	{
 		return tagName;
+	}
+	vector<TagAttribute> GetTagAttributes()
+	{
+		return attributes;
 	}
 };
 

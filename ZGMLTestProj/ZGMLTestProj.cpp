@@ -15,7 +15,7 @@ int main()
 
 
 	ZGML solver;
-	solver.ShowTags();
+	solver.RunProgram();
 
 }
 
