@@ -141,12 +141,14 @@
   <ItemGroup>
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagAttribute.cpp" />
+    <ClCompile Include="ZGML.cpp" />
     <ClCompile Include="ZGMLReader.cpp" />
     <ClCompile Include="ZGMLTestProj.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tag.h" />
     <ClInclude Include="TagAttribute.h" />
+    <ClInclude Include="ZGML.h" />
     <ClInclude Include="ZGMLReader.h" />
   </ItemGroup>
   <ItemGroup>

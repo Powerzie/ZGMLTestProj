@@ -1,4 +1,7 @@
 ﻿  ZGMLReader.cpp
+D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGMLReader.h(40,27): warning C4018: '<': signed/unsigned mismatch
   ZGMLTestProj.cpp
+D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGMLReader.h(40,27): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
+D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGMLReader.h(46): warning C4715: 'ZGMLReader::GetTagNameFromString': not all control paths return a value
   ZGMLTestProj.vcxproj -> D:\Programing\C++\ZGMLTestProj\Debug\ZGMLTestProj.exe

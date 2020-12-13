@@ -12,7 +12,7 @@ int main()
 	string str = "tagName";
 	attributes[0].GetTagName().find("<"+ str);*/
 	ZGMLReader reader;
-	reader.ReadZGMLFile();
+	reader.RunProg();
 
 }
 
