@@ -3,6 +3,8 @@
 #include<string>
 #include<fstream>
 #include <regex>
+#include"TagAttribute.h"
+#include"Tag.h"
 using namespace std;
 class ZGMLReader
 {
@@ -16,36 +18,104 @@ private:
 	const int maxRowWidth = 200;
 	const int maxRequestWidth = 200;
 
-	void BuildTags()
-	{
-		string query = "";
-		int tagStart = 0;
-		int  tagEnd = 0;
-
-		while (tagEnd != -1)
-		{
-			//query = fileRequests.substr(from, fileRequests.length());
-			tagStart = fileTags.find_first_of({ '<' });
-			cout << "</" + GetTagNameFromString(tagStart + 1) + '>';
-			tagEnd = fileTags.find_last_of("</"+ GetTagNameFromString(tagStart+1)+'>');
-			tagStart += tagEnd + 1;
-			cout << tagEnd;
-		}
-
-
-	}//Building tags from fileTagsString
 	string GetTagNameFromString(int tagStart)
 	{
 		string tagName = "";
-		for (int a = tagStart;a < fileTags.length();a++)
+		for (size_t a = tagStart;a<fileTags.length();a++)
 		{
 			if (fileTags[a] == ' ')
 				return tagName;
 			tagName += fileTags[a];
 		}
 	}
+	vector<shared_ptr<TagAttribute>> getTagAttributes(int tagStart)
+	{
+		vector<shared_ptr<TagAttribute>> attributes;
+		string attributeName = "";
+		string attributeValue = "";
+		for (int a = tagStart+1;fileTags[a]!='>';a++)
+		{
+			if (fileTags[a] == ' ')
+			{
+				if (fileTags[a+1] == '=')
+				{
+					a += 4;
+					while (fileTags[a] != '"')
+					{
+						attributeValue += fileTags[a];
+						a++;
+					}
+						attributes.push_back(make_shared<TagAttribute>(attributeName, attributeValue));
+					attributeName = "";
+				}
+				else
+				{
+					attributeName = "";
+					continue;
+				}
+			}
+			else
+			
+			attributeName += fileTags[a];
+		}
+	
+		return attributes;
+	}
+	int SearchTagEnd(string tagName)
+	{
+		return fileTags.find_last_of("</" + tagName + '>');
+	}
 
 public:
+	vector<shared_ptr<Tag>> GetTags()
+	{
+		int  tagStart = 0;
+		int  tagEnd = 0;
+		int lastTagEnd = 0;
+		int tagDescriptionEnd = 0;
+		string currentTagName = "";
+		vector<shared_ptr<Tag>> tags;
+		string str = fileTags;
+		while (tagStart != -1)
+		{
+			if (tagStart > str.length())
+				return tags;
+
+			str = str.substr(tagStart);
+			if (str[1] == '/')
+			{
+				tagStart = 0;
+				while (str[tagStart] != '>')
+				{
+					tagStart++;
+				}
+				str = str.substr(++tagStart);
+				continue;
+			}
+			//query = fileRequests.substr(from, fileRequests.length());
+			tagStart = str.find_first_of('<');
+
+			currentTagName = GetTagNameFromString(tagDescriptionEnd + 1);
+
+			tagEnd = SearchTagEnd("</" + currentTagName + '>');
+
+
+			tagDescriptionEnd = (str.find_first_of('>')) + 2;
+			if (tagEnd > lastTagEnd)
+			{
+				tags.push_back(make_shared<Tag>(currentTagName, getTagAttributes(tagStart)));
+			}
+			else
+			{
+				tags.back()->SetNestedTag(Tag(currentTagName, getTagAttributes(tagStart)));
+			}
+			lastTagEnd = tagEnd;
+			tagStart = tagDescriptionEnd;
+
+		}
+		return tags;
+	}//Building tags from fileTagsString
+
 	ZGMLReader()
 	{
 		textFilePath = "ZGML.txt";
@@ -53,12 +123,9 @@ public:
 		fileRequests = "";
 		requestsQuantity = 0;
 		tagRows = 0;
-	}
-	void RunProg()
-	{
 		ReadZGMLFile();
-		BuildTags();
 	}
+	
 	void ReadZGMLFile()
 	{
 		ifstream stream;

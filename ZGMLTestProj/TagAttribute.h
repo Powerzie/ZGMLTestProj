@@ -15,7 +15,6 @@ public:
 		attributeName(attributeName), 
 		attributeValue(attributeValue) 
 	{}
- 
 	
 	const string& GetTagName()const
 	{
