@@ -10,5 +10,6 @@ int main()
 	ZGML solver;
 	solver.RunProgram();
 
+	return 0;
 }
 

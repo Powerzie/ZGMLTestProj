@@ -1,25 +1,12 @@
 #include "ZGML.h"
 
+
+
+
 ZGML::ZGML()
 {
 	fileReader = make_shared<ZGMLReader>();
 	requests = fileReader->GetFileRequests();
-}
-
-void ZGML::ShowTags(vector<Tag> tags)
-{
-	for (int a = 0;a < (int)(tags.capacity());a++)
-	{
-		if (!tags[a].IsNestedTagsEmpty())
-		{
-			ShowTags(tags[a].GetNestedTags());
-		}
-		auto attributes = tags[a].GetTagAttributes();
-		for (int b = 0;b < (int)(attributes.capacity());b++)
-		{
-			cout << attributes[b].GetAttributeTagName() + " " + attributes[b].GetAttributeValue() << endl;
-		}
-	}
 }
 
 int ZGML::SearchRequestedValues(vector<Tag> tags, int startFrom)
@@ -81,7 +68,11 @@ int ZGML::SearchRequestedValues(vector<Tag> tags, int startFrom)
 						else
 							if (c == (attributes.size() - 1))
 							{
+								
 								cout << "Not Found!" << endl;
+								if (tags[f].GetIsNestedTag())
+									return a;
+
 								break;
 							}
 					}
@@ -97,7 +88,7 @@ int ZGML::SearchRequestedValues(vector<Tag> tags, int startFrom)
 
 		currentRequestWord += requests[a];
 	}
-
+	return 0;
 }
 
 void ZGML::RunProgram()

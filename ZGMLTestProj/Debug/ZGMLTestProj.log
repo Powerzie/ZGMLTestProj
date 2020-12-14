@@ -1,7 +1,6 @@
 ﻿  ZGML.cpp
-D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.cpp(30,27): warning C4018: '<=': signed/unsigned mismatch
-D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.cpp(36,21): warning C4018: '<': signed/unsigned mismatch
-D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.cpp(64,21): warning C4018: '<': signed/unsigned mismatch
-D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.cpp(69,23): warning C4018: '<': signed/unsigned mismatch
-D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.cpp(101): warning C4715: 'ZGML::SearchRequestedValues': not all control paths return a value
+D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.cpp(17,27): warning C4018: '<=': signed/unsigned mismatch
+D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.cpp(23,21): warning C4018: '<': signed/unsigned mismatch
+D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.cpp(51,21): warning C4018: '<': signed/unsigned mismatch
+D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.cpp(56,23): warning C4018: '<': signed/unsigned mismatch
   ZGMLTestProj.vcxproj -> D:\Programing\C++\ZGMLTestProj\Debug\ZGMLTestProj.exe

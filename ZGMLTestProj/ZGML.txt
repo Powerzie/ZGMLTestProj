@@ -16,4 +16,3 @@ tag2~name
 tag4~vasd
 tag3~res
 tag1.tag2.megaTag~something
-

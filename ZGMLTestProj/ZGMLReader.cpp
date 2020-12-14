@@ -9,6 +9,7 @@ string ZGMLReader::GetTagNameFromString(int tagStart)
 			return tagName;
 		tagName += fileTags[a];
 	}
+	return "";
 }
 
 vector<TagAttribute> ZGMLReader::getTagAttributes(int tagStart)
@@ -144,6 +145,7 @@ void ZGMLReader::ReadZGMLFile()
 					else
 					{
 						cout << "Wrong amount of rows or requests!!!\n";
+						stream.close();
 						return;
 					}
 				}
@@ -176,6 +178,7 @@ void ZGMLReader::ReadZGMLFile()
 				if (rowSize > maxRowWidth)
 				{
 					cout << "Tag row width must be less than 200\n";
+					stream.close();
 					return;
 				}
 
@@ -186,6 +189,7 @@ void ZGMLReader::ReadZGMLFile()
 				if (rowSize > maxRequestWidth)
 				{
 					cout << "Request width must be less than 200\n";
+					stream.close();
 					return;
 				}
 
