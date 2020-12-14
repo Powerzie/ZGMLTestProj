@@ -36,48 +36,65 @@ public:
 			}
 		}
 	}
-	void SearchRequestedValues(vector<Tag> tags,int startFrom=1)
+	int SearchRequestedValues(vector<Tag> tags,int startFrom=0)
 	{
 		string currentRequestWord = "";
 		int currentTag = 0;
 		for (int a = startFrom;a < requests.length();a++)
 		{
-			if(requests[a]=='.')
+			if (requests[a] == '.' )
 			{
-				for (;currentTag < tags.size();currentTag++)
+				a++;
+				currentTag = 0;
+				for (;currentTag < tags.size();++currentTag)
 				{
 					if (tags[currentTag].GetTagName() == currentRequestWord)
 					{
 						if (!tags[currentTag].IsNestedTagsEmpty())
 						{
-							SearchRequestedValues(tags[currentTag].GetNestedTags(), ++a);
+						a=	SearchRequestedValues(tags[currentTag].GetNestedTags(), a);
+						
+						break;
 						}
 						else
-							cout << "Not Found!";
+							cout << "Not Found!"<<endl;
 					}
 				}
+				currentTag = 0;
+				currentRequestWord = "";
 		    }
 			if (requests[a] == '~')
 			{
-				currentRequestWord = "";
-				while (requests[a] != '\n')
+				a++;
+				if (tags[currentTag].GetTagName() == currentRequestWord)
 				{
-					a++;
-					currentRequestWord += requests[a];
-				}
-
-				auto attributes = tags[currentTag].GetTagAttributes();
-				for (int c = 0;c < attributes.size();c++)
-				{
-					if (attributes[c].GetTagName() == currentRequestWord)
+					currentRequestWord = "";
+					while (requests[a] != '\n' && a != requests.length())
 					{
-						cout << attributes[c].GetAttributeValue();
-					}
-				}
-				cout << "Not Found!";
-			}
+						currentRequestWord += requests[a];
+						a++;
+			     	}
+					a += 1;
 
-			
+					auto attributes = tags[currentTag].GetTagAttributes();
+					for (int c = 0;c < attributes.size();c++)
+					{
+						if (attributes[c].GetTagName() == currentRequestWord)
+						{
+							cout << attributes[c].GetAttributeValue()<<endl;
+							return a;
+						}
+						else
+							if (c == attributes.size()-1)
+							{
+								cout << "Not Found!" << endl;
+							}
+					}
+					
+				}
+				currentRequestWord = "";
+				continue;
+			}
 
 			currentRequestWord += requests[a];
 		}

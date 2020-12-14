@@ -1,13 +1,14 @@
 ﻿  ZGML.cpp
 D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGMLReader.h(83,17): warning C4018: '>': signed/unsigned mismatch
 D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.h(43,28): warning C4018: '<': signed/unsigned mismatch
-D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.h(47,22): warning C4018: '<': signed/unsigned mismatch
-D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.h(70,22): warning C4018: '<': signed/unsigned mismatch
+D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.h(49,22): warning C4018: '<': signed/unsigned mismatch
+D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.h(80,23): warning C4018: '<': signed/unsigned mismatch
   ZGMLTestProj.cpp
 D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGMLReader.h(83,17): warning C4018: '>': signed/unsigned mismatch
 D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.h(43,28): warning C4018: '<': signed/unsigned mismatch
-D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.h(47,22): warning C4018: '<': signed/unsigned mismatch
-D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.h(70,22): warning C4018: '<': signed/unsigned mismatch
+D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.h(49,22): warning C4018: '<': signed/unsigned mismatch
+D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.h(80,23): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
+D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGML.h(102): warning C4715: 'ZGML::SearchRequestedValues': not all control paths return a value
 D:\Programing\C++\ZGMLTestProj\ZGMLTestProj\ZGMLReader.h(30): warning C4715: 'ZGMLReader::GetTagNameFromString': not all control paths return a value
   ZGMLTestProj.vcxproj -> D:\Programing\C++\ZGMLTestProj\Debug\ZGMLTestProj.exe

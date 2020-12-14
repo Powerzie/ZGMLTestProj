@@ -162,6 +162,9 @@ public:
 							return;
 						}
 					}
+					if (currentRow == tagRows+1)
+						continue;
+
 				}
 				if (currentRow == 0 )
 				{
