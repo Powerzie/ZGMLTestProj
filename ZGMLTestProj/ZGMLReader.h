@@ -64,7 +64,8 @@ private:
 	}
 	int SearchTagEnd(string tagName)
 	{
-		return fileTags.find_last_of("</" + tagName + '>');
+		return (int)(fileTags.find_last_of(tagName));
+		//FIND
 	}
 
 public:
@@ -74,7 +75,7 @@ public:
 		int  tagEnd = 0;
 		int lastTagEnd = 0;
 		int tagDescriptionEnd = 0;
-		int lastTagescriptionEnd = 0;
+		int lastTagDescriptionEnd = 0;
 		string currentTagName = "";
 		vector<Tag> tags;
 		string str = fileTags;
@@ -100,7 +101,7 @@ public:
 			//query = fileRequests.substr(from, fileRequests.length());
 			tagStart = str.find_first_of('<');
 
-			currentTagName = GetTagNameFromString(tagDescriptionEnd + 1);
+			currentTagName = GetTagNameFromString((fileTags.length() + 1) - str.length());
 
 			tagEnd = SearchTagEnd("</" + currentTagName + '>');
 
@@ -113,10 +114,10 @@ public:
 			}
 			else
 			{
-				auto attr = getTagAttributes(lastTagescriptionEnd);
+				auto attr = getTagAttributes((fileTags.length() + 1) - str.length());
 				tags.back().AddNestedTag(Tag(currentTagName, attr,true));
 			}
-			lastTagescriptionEnd = tagDescriptionEnd;
+			lastTagDescriptionEnd = tagDescriptionEnd;
 			lastTagEnd = tagEnd;
 			tagStart = tagDescriptionEnd;
 

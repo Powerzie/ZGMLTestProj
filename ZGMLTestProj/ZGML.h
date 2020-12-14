@@ -32,7 +32,7 @@ public:
 			auto attributes = tags[a].GetTagAttributes();
 			for (int b = 0;b < (int)(attributes.capacity());b++)
 			{
-				cout << attributes[b].GetTagName() +" "+ attributes[b].GetAttributeValue() << endl;
+				cout << attributes[b].GetAttributeTagName() +" "+ attributes[b].GetAttributeValue() << endl;
 			}
 		}
 	}
@@ -40,7 +40,8 @@ public:
 	{
 		string currentRequestWord = "";
 		int currentTag = 0;
-		for (int a = startFrom;a < requests.length();a++)
+		string tmpRequestWord = "";
+		for (int a = startFrom;a <= requests.length();a++)
 		{
 			if (requests[a] == '.' )
 			{
@@ -65,36 +66,48 @@ public:
 		    }
 			if (requests[a] == '~')
 			{
+				bool isFinded = false;
 				a++;
-				if (tags[currentTag].GetTagName() == currentRequestWord)
-				{
-					currentRequestWord = "";
-					while (requests[a] != '\n' && a != requests.length())
-					{
-						currentRequestWord += requests[a];
-						a++;
-			     	}
-					a += 1;
+				tmpRequestWord = currentRequestWord;
 
-					auto attributes = tags[currentTag].GetTagAttributes();
+				currentRequestWord = "";
+				while (requests[a] != '\n' && a != requests.length())
+				{
+					currentRequestWord += requests[a];
+					a++;
+				}
+				a += 1;
+				for(int f=0;f< tags.size();f++)
+				{
+				if (tags[f].GetTagName() == tmpRequestWord)
+				{
+					auto attributes = tags[f].GetTagAttributes();
 					for (int c = 0;c < attributes.size();c++)
 					{
-						if (attributes[c].GetTagName() == currentRequestWord)
+						if (attributes[c].GetAttributeTagName() == currentRequestWord)
 						{
 							cout << attributes[c].GetAttributeValue()<<endl;
-							if (tags[currentTag].GetIsNestedTag())
+							isFinded = true;
+							if (tags[f].GetIsNestedTag())
 								return a;
-							else
+							else  
 								break;
+							
 						}
 						else
-							if (c == attributes.size()-1)
-							{
-								cout << "Not Found!" << endl;
-							}
+							if (c == (attributes.size()-1))
+						{
+							cout << "Not Found!" << endl;
+							break;
+						}
 					}
 					
 				}
+				
+				}
+				if (!isFinded)
+					cout << "Not Found!" << endl;
+
 				currentRequestWord = "";
 			}
 
