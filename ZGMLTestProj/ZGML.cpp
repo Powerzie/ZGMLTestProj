@@ -43,8 +43,6 @@ int ZGML::SearchRequestedValues(vector<Tag> tags, int startFrom)
 
 						break;
 					}
-					else
-						cout << "Not Found!" << endl;
 				}
 			}
 			currentTag = 0;
