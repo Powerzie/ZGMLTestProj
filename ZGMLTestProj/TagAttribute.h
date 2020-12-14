@@ -2,9 +2,6 @@
 #include<iostream>
 
 using std::string;
-using std::shared_ptr;
-using std::make_shared;
-
 class TagAttribute
 {
 private:
@@ -16,14 +13,10 @@ public:
 		attributeValue(attributeValue) 
 	{}
 	
-	const string& GetAttributeTagName()const
-	{
-		return attributeName;
-	}
-	const string& GetAttributeValue()const
-	{
-	    return attributeValue;
-	}
+	const string& GetAttributeTagName()const;
+	
+	const string& GetAttributeValue()const;
+	
 
 };
 

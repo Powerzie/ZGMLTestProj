@@ -7,13 +7,6 @@
 
 int main()
 {
-	/*vector<TagAttribute> attributes ;
-
-	attributes.push_back(TagAttribute("tag", "hello"));
-	string str = "tagName";
-	attributes[0].GetTagName().find("<"+ str);*/
-
-
 	ZGML solver;
 	solver.RunProgram();
 

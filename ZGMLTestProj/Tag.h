@@ -1,6 +1,5 @@
 #pragma once
 #include "TagAttribute.h"
-#include<iostream>
 #include <vector>
 
 using std::string;
@@ -18,34 +17,20 @@ private:
 public:
 	Tag(string tagName, vector<TagAttribute> attributes, bool isNested = false) :attributes(attributes), tagName(tagName), IsNestedTag(isNested){};
 	Tag(string tagName) :tagName(tagName) {};
-	void AddNestedTag(Tag tag)
-	{
-		nestedTags.push_back(tag);
-	}
-	bool IsNestedTagsEmpty()
-	{
-		return nestedTags.size() < 1;
-	}
-	void SetIsNestedTag(bool b)
-	{
-		IsNestedTag = b;
-	}
-	const bool GetIsNestedTag()const
-	{
-		return IsNestedTag;
-	}
-	vector<Tag> GetNestedTags()
-	{
-		return nestedTags;
-	}
-	string GetTagName()const
-	{
-		return tagName;
-	}
-	vector<TagAttribute> GetTagAttributes()
-	{
-		return attributes;
-	}
+	void AddNestedTag(Tag tag);
+	
+	bool IsNestedTagsEmpty();
+	
+	void SetIsNestedTag(bool b);
+	
+	const bool GetIsNestedTag()const;
+	
+	vector<Tag> GetNestedTags();
 
+
+	string GetTagName()const;
+
+	vector<TagAttribute> GetTagAttributes();
+	
 };
 
