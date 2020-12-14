@@ -64,8 +64,8 @@ private:
 	}
 	int SearchTagEnd(string tagName)
 	{
-		return (int)(fileTags.find_last_of(tagName));
-		//FIND
+		return (int)(fileTags.find(tagName));
+
 	}
 
 public:
@@ -110,7 +110,7 @@ public:
 			
 			if (tagEnd > lastTagEnd)
 			{
-				tags.push_back(Tag(currentTagName, getTagAttributes(tagStart)));
+				tags.push_back(Tag(currentTagName, getTagAttributes((fileTags.length() + 1) - str.length())));
 			}
 			else
 			{
@@ -118,7 +118,7 @@ public:
 				tags.back().AddNestedTag(Tag(currentTagName, attr,true));
 			}
 			lastTagDescriptionEnd = tagDescriptionEnd;
-			lastTagEnd = tagEnd;
+			lastTagEnd<tagEnd? lastTagEnd = tagEnd: lastTagEnd;
 			tagStart = tagDescriptionEnd;
 
 		}
@@ -170,10 +170,20 @@ public:
 				}
 				if (currentRow == 0 )
 				{
-					if(c!=' ')
-					tagRows == 0 ? tagRows = c-'0' : requestsQuantity = c - '0';
-
-
+					bool isSecondNumber = false;
+					while (c != '\n')
+					{
+						if (c == ' ')
+						{
+							isSecondNumber = true;
+							stream.get(c);
+							continue;
+						}
+						!isSecondNumber ? tagRows = tagRows*10+ (c - '0') : requestsQuantity = requestsQuantity * 10 + (c - '0');
+						stream.get(c);
+							
+					}
+					currentRow++;
 					continue;
 			    }
 
@@ -206,7 +216,6 @@ public:
 			cout << ex.what();
 		}
 		stream.close();
-		//cout << FileTags<<endl<<FileRequests;
 	}
 	const string GetFileRequests()const
 	{

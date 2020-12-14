@@ -1,14 +1,19 @@
-6 6
-<tag1 value = "HelloWorld">
+10 8
+<tag1 value = "HelloWorld" value3 = "HelloWorld3" value4 = "HelloWorld4" value5 = "HelloWorld5">
 <tag2 name = "Name1">
+<megaTag something = "MegaTagHere">
+</megaTag>
 </tag2>
 <tag3 res = "name3">
 </tag3>
 </tag1>
+<tag4 vasd = "HelloFromTag4">
+</tag4>
 tag1.tag2~name
 tag1.tag3~res
-tag1~value
+tag1~value4
 tag2~name
+tag4~vasd
 tag3~res
-tag1~value
+tag1.tag2.megaTag~something
 
