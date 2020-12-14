@@ -47,6 +47,7 @@ private:
 					}
 						attributes.push_back(TagAttribute(attributeName, attributeValue));
 					attributeName = "";
+					attributeValue = "";
 				}
 				else
 				{
@@ -113,7 +114,7 @@ public:
 			else
 			{
 				auto attr = getTagAttributes(lastTagescriptionEnd);
-				tags.back().AddNestedTag(Tag(currentTagName, attr));
+				tags.back().AddNestedTag(Tag(currentTagName, attr,true));
 			}
 			lastTagescriptionEnd = tagDescriptionEnd;
 			lastTagEnd = tagEnd;
@@ -206,15 +207,7 @@ public:
 		stream.close();
 		//cout << FileTags<<endl<<FileRequests;
 	}
-	void SearchValues()
-	{
-		
-		
-	/*	for (int a = 0;a < requestsQuantity;a++)
-		{
-		}*/
-	}
-	string GetFileRequests()
+	const string GetFileRequests()const
 	{
 		return fileRequests;
 	}

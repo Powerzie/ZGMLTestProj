@@ -52,7 +52,7 @@ public:
 					{
 						if (!tags[currentTag].IsNestedTagsEmpty())
 						{
-						a=	SearchRequestedValues(tags[currentTag].GetNestedTags(), a);
+						a =	SearchRequestedValues(tags[currentTag].GetNestedTags(), a);
 						
 						break;
 						}
@@ -82,7 +82,10 @@ public:
 						if (attributes[c].GetTagName() == currentRequestWord)
 						{
 							cout << attributes[c].GetAttributeValue()<<endl;
-							return a;
+							if (tags[currentTag].GetIsNestedTag())
+								return a;
+							else
+								break;
 						}
 						else
 							if (c == attributes.size()-1)
@@ -93,7 +96,6 @@ public:
 					
 				}
 				currentRequestWord = "";
-				continue;
 			}
 
 			currentRequestWord += requests[a];

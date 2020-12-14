@@ -14,8 +14,9 @@ private:
 	vector<TagAttribute> attributes;
 	vector<Tag> nestedTags ;
 	string tagName;
+	bool IsNestedTag;
 public:
-	Tag(string tagName, vector<TagAttribute> attributes):attributes(attributes), tagName(tagName) {};
+	Tag(string tagName, vector<TagAttribute> attributes, bool isNested = false) :attributes(attributes), tagName(tagName), IsNestedTag(isNested){};
 	Tag(string tagName) :tagName(tagName) {};
 	void AddNestedTag(Tag tag)
 	{
@@ -25,7 +26,14 @@ public:
 	{
 		return nestedTags.size() < 1;
 	}
-	
+	void SetIsNestedTag(bool b)
+	{
+		IsNestedTag = b;
+	}
+	const bool GetIsNestedTag()const
+	{
+		return IsNestedTag;
+	}
 	vector<Tag> GetNestedTags()
 	{
 		return nestedTags;
@@ -38,5 +46,6 @@ public:
 	{
 		return attributes;
 	}
+
 };
 
